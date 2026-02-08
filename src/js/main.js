@@ -1,7 +1,5 @@
 import { getParkData } from "./parkService.mjs";
 
-const parkData = getParkData();
-
 // Template Functions
 function parkInfoTemplate(info) {
   return `<a href="/" class="hero-banner__title">${info.name}</a>
@@ -40,29 +38,6 @@ function footerTemplate(info) {
   </section>`;
 }
 
-// Data
-const parkInfoLinks = [
-  {
-    name: "Current Conditions &#x203A;",
-    link: "conditions.html",
-    image: parkData.images[2].url,
-    description:
-      "See what conditions to expect in the park before leaving on your trip!"
-  },
-  {
-    name: "Fees and Passes &#x203A;",
-    link: "fees.html",
-    image: parkData.images[3].url,
-    description: "Learn about the fees and passes that are available."
-  },
-  {
-    name: "Visitor Centers &#x203A;",
-    link: "visitor_centers.html",
-    image: parkData.images[9].url,
-    description: "Learn about the visitor centers in the park."
-  }
-];
-
 // Setter Functions
 function setHeaderInfo(data) {
   const disclaimer = document.querySelector(".disclaimer > a");
@@ -83,9 +58,9 @@ function setParkIntro(data) {
   introEl.innerHTML = introTemplate(data);
 }
 
-function setParkInfoLinks(data) {
+function setParkInfoLinks(links) {
   const infoEl = document.querySelector(".info");
-  const html = data.map(mediaCardTemplate);
+  const html = links.map(mediaCardTemplate);
   infoEl.innerHTML = html.join("");
 }
 
@@ -94,10 +69,46 @@ function setFooter(data) {
   footerEl.innerHTML = footerTemplate(data);
 }
 
+// Data
+const parkInfoLinks = [
+  {
+    name: "Current Conditions &#x203A;",
+    link: "conditions.html",
+    description:
+      "See what conditions to expect in the park before leaving on your trip!"
+  },
+  {
+    name: "Fees and Passes &#x203A;",
+    link: "fees.html",
+    description: "Learn about the fees and passes that are available."
+  },
+  {
+    name: "Visitor Centers &#x203A;",
+    link: "visitor_centers.html",
+    description: "Learn about the visitor centers in the park."
+  }
+];
+
+// Get info links with updated images
+export function getInfoLinks(data) {
+  // Why index + 2 below? no real reason. we don't want index 0 since that is the one we used for the banner...I decided to skip an image.
+  const withUpdatedImages = parkInfoLinks.map((item, index) => {
+    const imageIndex = index + 2;
+    item.image = (data && data[imageIndex] ? data[imageIndex].url : (data && data[0] ? data[0].url : ""));
+    return item;
+  });
+  return withUpdatedImages;
+}
+
 // Initialize
-setHeaderInfo(parkData);
-setParkIntro(parkData);
-setParkInfoLinks(parkInfoLinks);
-setFooter(parkData);
+async function init() {
+  const parkData = await getParkData();
+  const parkInfoLinks = getInfoLinks(parkData.images);
 
+  setHeaderInfo(parkData);
+  setParkIntro(parkData);
+  setParkInfoLinks(parkInfoLinks);
+  setFooter(parkData);
+}
 
+init();

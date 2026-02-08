@@ -1,0 +1,36 @@
+/* ========================================
+   Global Styles
+   ======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  width: 99%;
+  font-family: var(--bs-body-font-family);
+  font-size: 18px;
+  margin: auto;
+}
+
+a:link,
+a:visited {
+  color: var(--bs-link-color);
+}
+
+a:hover {
+  color: var(--bs-link-hover-color);
+}
+
+h1 {
+  font: 2em helvetica;
+}
+
+svg {
+  background-color: var(--bs-black);
+  fill: white;
+}
