@@ -3,7 +3,7 @@
    ======================================== */
 
 #park-footer {
-  background-image: url(../images/topo_pattern.png);
+  background-image: url(../../images/topo_pattern.png);
   padding: 2rem;
   margin-top: 3rem;
   border-top: 3px solid var(--bs-crete);

@@ -1,11 +1,10 @@
 
-@import "partials/variables.css";
+@import "partials/Variables.css";
 @import "partials/Global.css";
 @import "partials/Header.css";
 @import "partials/Footer.css";
 @import "partials/Blocks.css";
 @import "partials/Utilities.css";
-@import "Home.css";
 
 
 

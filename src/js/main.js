@@ -1,3 +1,5 @@
+
+import "../css/Home.css";
 import { getParkData } from "./parkService.mjs";
 
 // Template Functions

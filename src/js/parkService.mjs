@@ -22,9 +22,19 @@ export async function getParkData() {
   return parkData.data[0];
 }
 
-export async function getVisitorCenterData() {
-  const visitorCenterData = await getJson("visitorcenters?parkCode=glac");
-  return visitorCenterData.data[0];
+export async function getVisitorCenterData(parkCode) {
+  const visitorCenterData = await getJson(`visitorcenters?parkCode=${parkCode}`);
+  return visitorCenterData.data ?? [];
+}
+
+export async function getParkAlerts(parkCode) {
+  const alertsData = await getJson(`alerts?parkCode=${parkCode}`);
+  return alertsData.data ?? [];
+}
+
+export async function getActivitiesData(parkCode) {
+  const activitiesData = await getJson(`activities?parkCode=${parkCode}`);
+  return activitiesData.data ?? [];
 }
 
 const park = {
