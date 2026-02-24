@@ -8,8 +8,9 @@
   background-color: var(--bs-black);
   color: white;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   fill: white;
+  position: relative;
 }
 
 .global-header a:link,
@@ -27,8 +28,25 @@
 
 .global-header__right {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-direction: row;
+  position: relative;
 }
+/* Wrapper for toggle and nav */
+.global-nav-toggle-nav-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Keep toggle button fixed at top-right of header */
+.global-nav__toggle {
+  position: absolute;
+  top: 0.5em;
+  right: 1em;
+  z-index: 20;
+}
+
 
 .global-header__right .search-icon {
   padding: 0 1rem;
@@ -128,9 +146,51 @@
 .park-nav a:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
-
-.park-nav svg {
+.park-nav svg{
   width: 24px;
   height: 24px;
 }
 
+/* Global nav styles */
+
+.global-nav {
+  width: 100%;
+  grid-column: 1/3;
+  border-top: 1px solid #333;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.global-nav button {
+  background-color: transparent;
+  border: 0;
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.global-nav svg {
+  --icon-color: white;
+}
+
+/* styles to control opening and closing of menus */
+
+.global-nav__toggle--closed {
+  display: flex;
+  align-items: center;
+}
+.global-nav__toggle--open {
+  display: none;
+  align-items: center;
+}
+
+.global-nav__toggle[aria-expanded="true"] > .global-nav__toggle--closed {
+  display: none;
+}
+.global-nav__toggle[aria-expanded="true"] > .global-nav__toggle--open {
+  display: flex;
+}
+
+.global-nav.show {
+  max-height: 1000px;
+}

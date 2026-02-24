@@ -1,5 +1,6 @@
 
 import "../css/Home.css";
+import "../css/style.css";
 import { getParkData } from "./parkService.mjs";
 
 // Template Functions
@@ -25,18 +26,28 @@ function mediaCardTemplate(info) {
 }
 
 function footerTemplate(info) {
-  const mailingAddress = info.addresses.find(addr => addr.type === "Mailing");
-  const voicePhone = info.contacts.phoneNumbers.find(phone => phone.type === "Voice");
+  const mailingAddress = info.addresses?.find(addr => addr.type === "Mailing");
+  const voicePhone = info.contacts?.phoneNumbers?.find(phone => phone.type === "Voice");
   
-  return `<section class="contact-info">
-    <h3>Contact Information</h3>
+  let addressHtml = "";
+  if (mailingAddress) {
+    addressHtml = `
     <h4>Mailing Address:</h4>
     <p>
       ${mailingAddress.line1}<br>
       ${mailingAddress.city}, ${mailingAddress.stateCode} ${mailingAddress.postalCode}
-    </p>
+    </p>`;
+  }
+  
+  let phoneHtml = "";
+  if (voicePhone) {
+    phoneHtml = `
     <h4>Phone:</h4>
-    <p><a href="tel:+1${voicePhone.phoneNumber}">${voicePhone.phoneNumber}</a></p>
+    <p><a href="tel:+1${voicePhone.phoneNumber}">${voicePhone.phoneNumber}</a></p>`;
+  }
+  
+  return `<section class="contact-info">
+    <h3>Contact Information</h3>${addressHtml}${phoneHtml}
   </section>`;
 }
 
@@ -113,4 +124,30 @@ async function init() {
   setFooter(parkData);
 }
 
+
+function enableNavigation() {
+  const menuButton = document.querySelector("#global-nav-toggle");
+  
+  // when the main menu button is clicked:
+  menuButton.addEventListener("click", (ev) => {
+    let target = ev.target;
+  // toggle the show class on the global-nav
+  document.querySelector(".global-nav").classList.toggle("show");
+  // check to see if ev.target is the button or something inside the button
+  if (target.tagName != "BUTTON") {
+    target = target.closest("button");
+  }
+  // check to see if we just opened or closed the menu
+  if (document.querySelector(".global-nav").classList.contains("show")) {
+    // if we opened it then set the aria-expanded attribute to true
+    target.setAttribute("aria-expanded", true);
+  } else {
+    // if we closed it then set the aria-expanded attribute to false
+    target.setAttribute("aria-expanded", false);
+  }
+
+  console.log("toggle");
+  });
+}
 init();
+enableNavigation();

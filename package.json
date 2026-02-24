@@ -8,12 +8,21 @@
     "dev": "vite",
     "start": "vite",
     "build": "vite build --emptyOutDir",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint *.js src/**/*.js",
+    "lint-fix": "eslint *.js src/**/*.js --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+
     "vite": "^6.2.3"
+    
+  },
+  "devDependencies": {
+    "globals": "^16.0.0",
+    "@eslint/js": "^9.22.0",
+    "eslint": "^10.0.2"
   }
 }
