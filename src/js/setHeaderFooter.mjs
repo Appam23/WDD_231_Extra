@@ -1,3 +1,7 @@
+
+import enableNavigation from "./nevigation.mjs";
+
+
 function parkInfoTemplate(info) {
   return `<a href="/" class="hero-banner__title">${info.name}</a>
   <p class="hero-banner__subtitle">
@@ -28,7 +32,7 @@ function footerTemplate(info) {
   </section>`;
 }
 
-export default function setHeaderFooter(data) {
+export function setHeaderFooter(data) {
   if (!data) return;
 
   const disclaimer = document.querySelector(".disclaimer > a");
@@ -56,5 +60,6 @@ export default function setHeaderFooter(data) {
   const footerEl = document.querySelector("#park-footer");
   if (footerEl) {
     footerEl.innerHTML = footerTemplate(data);
-  }
+  }enableNavigation();
 }
+

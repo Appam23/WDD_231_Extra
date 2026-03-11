@@ -5,6 +5,30 @@
 @import "partials/Footer.css";
 @import "partials/Blocks.css";
 @import "partials/Utilities.css";
+/* Responsive styles for mobile devices */
+
+@media (max-width: 768px) {
+	body {
+		font-size: 16px;
+		padding: 0 8px;
+	}
+	h1 {
+		font-size: 1.5em;
+	}
+	.global-header, .global-header__right {
+		flex-direction: column;
+		align-items: stretch;
+	}
+	.media-card img {
+		height: 120px;
+	}
+	.contact-info {
+		padding: 1rem;
+	}
+	.skip-links a {
+		right: 8px;
+	}
+}
 
 
 
